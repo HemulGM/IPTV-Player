@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{2A5DF5C6-99F1-40BF-8BB0-85FF16EFE533}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="BigTV.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="BigTV">
+        <MSBuild Projects="BigTV.dproj"/>
+    </Target>
+    <Target Name="BigTV:Clean">
+        <MSBuild Projects="BigTV.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BigTV:Make">
+        <MSBuild Projects="BigTV.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="BigTV"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="BigTV:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="BigTV:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
