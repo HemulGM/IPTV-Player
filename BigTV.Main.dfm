@@ -20,12 +20,14 @@ object FormMain: TFormMain
   Padding.Right = 2
   Padding.Bottom = 2
   OldCreateOrder = False
+  ScreenSnap = True
   Visible = True
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   OnKeyUp = FormKeyUp
   OnResize = FormResize
+  OnShow = FormShow
   DesignSize = (
     966
     705)
@@ -43,25 +45,24 @@ object FormMain: TFormMain
     ParentBackground = False
     ParentDoubleBuffered = False
     TabOrder = 0
-    object DrawPanelCtrl: TPasLibVlcPlayer
+    object VlcPlayer: TPasLibVlcPlayer
       Left = 0
       Top = 0
       Width = 362
       Height = 641
       Align = alClient
-      OnDblClick = DrawPanelCtrlDblClick
-      OnMouseDown = DrawPanelCtrlMouseDown
-      OnMouseEnter = DrawPanelCtrlMouseEnter
-      OnMouseMove = DrawPanelCtrlMouseMove
-      OnMouseUp = DrawPanelCtrlMouseUp
+      OnClick = VlcPlayerClick
+      OnDblClick = VlcPlayerDblClick
+      OnMouseDown = VlcPlayerMouseDown
+      OnMouseEnter = VlcPlayerMouseEnter
+      OnMouseMove = VlcPlayerMouseMove
+      OnMouseUp = VlcPlayerMouseUp
       VideoOutput = voWinGdi
       AudioOutput = aoWaveOut
       SnapShotFmt = 'png'
       DeinterlaceFilter = deON
       DeinterlaceMode = dmBLEND
       MouseEventsHandler = mehComponent
-      ExplicitLeft = 6
-      ExplicitTop = -40
     end
   end
   object PanelCtrl: TPanel
@@ -1000,7 +1001,6 @@ object FormMain: TFormMain
       DblClickTooClick = False
       ImageCheck = 8
       ImageUncheck = 9
-      ExplicitTop = 33
     end
     object CheckBoxPanelCtrl: TCheckBoxFlat
       Left = 0
@@ -1045,7 +1045,6 @@ object FormMain: TFormMain
       DblClickTooClick = False
       ImageCheck = 8
       ImageUncheck = 9
-      ExplicitTop = 66
     end
     object ButtonFlatMin2: TButtonFlat
       Left = 0
@@ -1185,7 +1184,6 @@ object FormMain: TFormMain
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitTop = 40
     end
   end
   object DrawPanelLeftTop: TDrawPanel
@@ -1209,13 +1207,14 @@ object FormMain: TFormMain
     ParentBackground = False
     TabOrder = 6
     Visible = False
+    OnClick = ButtonFlatMuteClick
   end
   object ImageList16: TImageList
     ColorDepth = cd32Bit
     Left = 625
     Top = 96
     Bitmap = {
-      494C0101150080009C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115008000A80010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2057,7 +2056,7 @@ object FormMain: TFormMain
     Left = 704
     Top = 96
     Bitmap = {
-      494C0101010008002C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010101000800380020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

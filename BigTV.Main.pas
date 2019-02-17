@@ -84,7 +84,7 @@ type
     TableExFavChannels: TTableEx;
     ButtonFlatPause: TButtonFlat;
     ButtonFlatPlay: TButtonFlat;
-    DrawPanelCtrl: TPasLibVlcPlayer;
+    VlcPlayer: TPasLibVlcPlayer;
     ButtonFlatTVGuide: TButtonFlat;
     procedure FormCreate(Sender: TObject);
     procedure TableExChannelsDblClick(Sender: TObject);
@@ -105,8 +105,8 @@ type
       MousePos: TPoint; var Handled: Boolean);
     procedure DrawPanelVolumeMouseWheelUp(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
-    procedure DrawPanelCtrlDblClick(Sender: TObject);
-    procedure DrawPanelCtrlMouseEnter(Sender: TObject);
+    procedure VlcPlayerDblClick(Sender: TObject);
+    procedure VlcPlayerMouseEnter(Sender: TObject);
     procedure TimerInfoHideTimer(Sender: TObject);
     procedure DrawPanelInfoPaint(Sender: TObject);
     procedure TableExChannelsMouseUp(Sender: TObject; Button: TMouseButton;
@@ -115,15 +115,15 @@ type
     procedure ButtonFlatCloseGuideClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure ButtonFlatCloseChannelsClick(Sender: TObject);
-    procedure DrawPanelCtrlMouseUp(Sender: TObject; Button: TMouseButton;
+    procedure VlcPlayerMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ButtonFlatQuitClick(Sender: TObject);
     procedure ButtonFlat1Click(Sender: TObject);
-    procedure DrawPanelCtrlMouseDown(Sender: TObject; Button: TMouseButton;
+    procedure VlcPlayerMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure TimerHideCursorTimer(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure DrawPanelCtrlMouseMove(Sender: TObject; Shift: TShiftState; X,
+    procedure VlcPlayerMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure TimerShowVolumeTimer(Sender: TObject);
@@ -158,6 +158,8 @@ type
     procedure TableExChannelsChangeItem(Sender: TObject; const Old: Integer;
       var New: Integer);
     procedure ButtonFlatTVGuideClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure VlcPlayerClick(Sender: TObject);
   protected
    procedure WMQueryEndSession(var Msg: TWMQueryEndSession); message WM_QUERYENDSESSION;
    procedure CreateParams(var Params: TCreateParams); override;
@@ -190,6 +192,7 @@ type
     FShowPanelCtrl:Boolean;
     FChannelsMouse:TPoint;
     FChannelFavoriteIn:Boolean;
+    FTvGuideUrl:string;
     procedure SetVolume(const Value: Integer);
     procedure SetFullScreen(const Value: Boolean);
     procedure ShowInfo;
@@ -229,18 +232,29 @@ type
     property Channels:TChannels read FChannels;
   end;
 
-const
-  TvGuideUrl = 'http://bolshoe.tv/tv.zip';
-
 var
   FormMain: TFormMain;
+
+  function GetMins(Time:TTime):Integer;
 
 implementation
  uses Math, HGM.Common.Utils, Zip, IniFiles, Registry, BigTV.SmartGuide;
 
 {$R *.dfm}
 
-//http://bolshoe.tv/tv.zip
+function GetMins(Time:TTime):Integer;
+var H, M, S, MSec:Word;
+begin
+ DecodeTime(Time, H, M, S, MSec);
+ Result:=H*60 + M;
+end;
+
+function GetSeconds(Time:TTime):Integer;
+var H, M, S, MSec:Word;
+begin
+ DecodeTime(Time, H, M, S, MSec);
+ Result:=(H*60 + M) * 60 + S;
+end;
 
 function GetIniFileName:string;
 begin
@@ -249,9 +263,9 @@ end;
 
 procedure TFormMain.ShowCursor(Value:Boolean);
 begin
- if Value then DrawPanelCtrl.Cursor:=crDefault else
+ if Value then VlcPlayer.Cursor:=crDefault else
   begin
-   DrawPanelCtrl.Cursor:=crNone;
+   VlcPlayer.Cursor:=crNone;
    FFreezPos:=Mouse.CursorPos;
   end;
 end;
@@ -270,19 +284,23 @@ var HTTP:TIdHTTP;
   i: Integer;
 begin
  if not FileExists(GetIniFileName) then FileClose(FileCreate(GetIniFileName));
+ if Url.IsEmpty then Exit;
  Ini:=TIniFile.Create(GetIniFileName);
  if Ini.ReadDateTime('Info', 'LastTvGuideCheck', Now-2) < Now-1/24*12 then
   begin
    HTTP:=TIdHTTP.Create(nil);
    HTTP.HandleRedirects:=True;
    Stream:=TMemoryStream.Create;
-   HTTP.Get(Url, Stream);
-   Stream.SaveToFile(ExtractFilePath(Application.ExeName)+'\TvGuide\tv.zip');
-   Stream.Free;
    Zip:=TZipFile.Create;
-   Zip.ExtractZipFile(ExtractFilePath(Application.ExeName)+'\TvGuide\tv.zip', ExtractFilePath(Application.ExeName)+'\TvGuide\', nil);
-   Zip.Free;
-   HTTP.Free;
+   try
+    HTTP.Get(Url, Stream);
+    Stream.SaveToFile(ExtractFilePath(Application.ExeName)+'\TvGuide\tv.zip');
+    Zip.ExtractZipFile(ExtractFilePath(Application.ExeName)+'\TvGuide\tv.zip', ExtractFilePath(Application.ExeName)+'\TvGuide\', nil);
+   finally
+    HTTP.Free;
+    Stream.Free;
+    Zip.Free;
+   end;
    Ini.WriteDateTime('Info', 'LastTvGuideCheck', Now);
   end;
  Ini.Free;
@@ -376,11 +394,20 @@ begin
  TMPstr.LoadFromFile(FileName, TEncoding.UTF8);
  TMPstr.NameValueSeparator:=',';
  Fill:=False;
+ FTvGuideUrl:='';
  for i:=0 to TMPstr.Count - 1 do
   begin
    s:=TMPstr.Strings[i];
    if s = '' then Continue;
-   if Pos('#extm3u', AnsiLowerCase(s)) > 0 then Continue;
+   if Pos('#extm3u', AnsiLowerCase(s)) > 0 then
+    begin
+     if Pos('url-tvg', AnsiLowerCase(s)) > 0 then
+      begin
+       FTvGuideUrl:=Copy(s, Pos('"', s)+1, Length(s)-(Pos('"', s)+1));
+       FTvGuideUrl:=Copy(FTvGuideUrl, 1, Pos('"', FTvGuideUrl)-1);
+      end;
+     Continue;
+    end;
    if Pos('#extinf', AnsiLowerCase(s)) > 0 then
     begin
      Item.Name:=Trim(TMPstr.ValueFromIndex[i]);
@@ -573,6 +600,7 @@ end;
 procedure TFormMain.Quit;
 begin
  Hide;
+ FPlayer.SetAudioVolume(0);
  FPlayer.Stop;
  Save;
  Application.Terminate;
@@ -612,12 +640,17 @@ begin
  TimerInfoHide.Enabled:=False;
 end;
 
-procedure TFormMain.DrawPanelCtrlDblClick(Sender: TObject);
+procedure TFormMain.VlcPlayerClick(Sender: TObject);
+begin
+ VlcPlayer.SetFocus;
+end;
+
+procedure TFormMain.VlcPlayerDblClick(Sender: TObject);
 begin
  FullScreen:=not FullScreen;
 end;
 
-procedure TFormMain.DrawPanelCtrlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TFormMain.VlcPlayerMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 const SC_DRAGMOVE = $F012;
 begin
  case Button of
@@ -630,12 +663,14 @@ begin
   end;
 end;
 
-procedure TFormMain.DrawPanelCtrlMouseEnter(Sender: TObject);
+procedure TFormMain.VlcPlayerMouseEnter(Sender: TObject);
 begin
- DrawPanelCtrl.SetFocus;
+ if Assigned(FFormPopup) then
+  if FFormPopup.Visible then Exit;
+ VlcPlayer.SetFocus;
 end;
 
-procedure TFormMain.DrawPanelCtrlMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TFormMain.VlcPlayerMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 begin
  if FFreezPos.Distance(Mouse.CursorPos) > 5 then
   begin
@@ -644,7 +679,7 @@ begin
    TimerHideCursor.Enabled:=True;
   end;
  if FFullScreen then
-  if (DrawPanelCtrl.Height - Y) < 3 then
+  if (VlcPlayer.Height - Y) < 3 then
        SetShowPanelCtrl(True)
   else SetShowPanelCtrl(False);
 
@@ -655,7 +690,7 @@ begin
  FFormPopup:=TFormPopup.Create(Self, PanelPopup, Mouse.CursorPos.X, Mouse.CursorPos.Y);
 end;
 
-procedure TFormMain.DrawPanelCtrlMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TFormMain.VlcPlayerMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
  case Button of
   TMouseButton.mbRight: ShowPopup;
@@ -670,9 +705,9 @@ end;
 
 procedure TFormMain.DrawPanelInfoPaint(Sender: TObject);
 var R:TRect;
-    S:string;
+    S, S2:string;
     G1, G2:TChannelGuideItem;
-    i:Integer;
+    i, t1, t2:Integer;
 
 function GetFontSize(Text:string):Integer;
 var Sz:TSize;
@@ -721,12 +756,29 @@ begin
    if (i <> -1) and IndexInList(i, FChannels[FCurrentChannel].Guide.Count) then
     begin
      G1:=FChannels[FCurrentChannel].Guide[i];
-     G2:=FChannels[FCurrentChannel].Guide[FChannels[FCurrentChannel].GetNowWatchID+1];
+
      S:=FormatDateTime('HH:nn', G1.Date)+' '+G1.Text;
+     S2:='';
      Font.Size:=GetFontSize(S);
+
+     if IndexInList(FChannels[FCurrentChannel].GetNowWatchID+1, FChannels[FCurrentChannel].Guide.Count) then
+      begin
+       G2:=FChannels[FCurrentChannel].Guide[FChannels[FCurrentChannel].GetNowWatchID+1];
+       t1:=GetSeconds(Now);
+       S2:=FormatDateTime('HH:nn', G2.Date);
+       t1:=Round(100 / (GetSeconds(G2.Date) - GetSeconds(G1.Date)) * (t1 - GetSeconds(G1.Date)));
+       Brush.Style:=bsSolid;
+       Brush.Color:=$00363636;
+       R:=DrawPanelInfo.ClientRect;
+       R.Inflate(-1, -1);
+       R.Width:=Round(R.Width * (t1/100));
+       FillRect(R);
+       R:=DrawPanelInfo.ClientRect;
+       R.Inflate(-3, -3);
+      end;
+     Brush.Style:=bsClear;
      TextRect(R, S, [tfSingleLine, tfVerticalCenter, tfWordEllipsis]);
-     S:=FormatDateTime('HH:nn', G2.Date);
-     TextRect(R, S, [tfSingleLine, tfRight, tfVerticalCenter]);
+     TextRect(R, S2, [tfSingleLine, tfRight, tfVerticalCenter]);
     end
    else
     begin
@@ -745,13 +797,13 @@ var R:TRect;
 function GetFontSize(Text:string):Integer;
 var Sz:TSize;
 begin
- with DrawPanelInfo.Canvas do
+ with DrawPanelLeftTop.Canvas do
   begin
    Font.Size:=8;
    repeat
     Font.Size:=Font.Size + 1;
     Sz:=TextExtent(S);
-   until (Sz.Height > R.Height);
+   until (Sz.Height > R.Height) or (Sz.Width > DrawPanelInfo.Width-Round(DrawPanelInfo.Width * 10/100));
    Result:=Font.Size-1;
    if DrawPanelLeftTop.Width <> Sz.Width then DrawPanelLeftTop.Width:=Sz.Width;
   end;
@@ -983,9 +1035,9 @@ begin
  FShowNum:=False;
  FCurrentGuide:=-1;
  FOldSize:=Rect(Left, Top, Width, Height);
- DrawPanelCtrl.OnMouseWheelUp:=DrawPanelVolumeMouseWheelUp;
- DrawPanelCtrl.OnMouseWheelDown:=DrawPanelVolumeMouseWheelDown;
- FPlayer:=DrawPanelCtrl;
+ VlcPlayer.OnMouseWheelUp:=DrawPanelVolumeMouseWheelUp;
+ VlcPlayer.OnMouseWheelDown:=DrawPanelVolumeMouseWheelDown;
+ FPlayer:=VlcPlayer;
  FPlayer.SetAudioVolume(FVolume);
  FPlayer.TabStop:=True;
  //FPlayer.VLC.AddOption(':sout=#duplicate{dst=display,dst=std{access=file,mux=mp4,dst="D:\t.mp4"}}');
@@ -1001,7 +1053,7 @@ begin
  //Load
  LoadSettings;
  LoadM3UPlayList(GetCurrentDir+'\IpTvPlayer.m3u', FChannels);
- LoadTVGuide(TvGuideUrl);
+ LoadTVGuide(FTvGuideUrl);
  LoadChannelsInfo;
  //Start
  FIniting:=False;
@@ -1103,6 +1155,11 @@ begin
  DrawPanelTopRight.Left:=ClientWidth - (DrawPanelTopRight.Width + 8);
 end;
 
+procedure TFormMain.FormShow(Sender: TObject);
+begin
+ FormResize(nil);
+end;
+
 procedure TFormMain.PanelCtrlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 const SC_DRAGMOVE = $F012;
 begin
@@ -1141,7 +1198,6 @@ begin
    //FPlayer.SetFullScreen(False);
    ShowCursor(True);
   end;
- FormResize(nil);
 end;
 
 procedure TFormMain.ShowVolume;
@@ -1328,7 +1384,7 @@ end;
 procedure TFormMain.TimerHideCursorTimer(Sender: TObject);
 begin
  TimerHideCursor.Enabled:=False;
- if (DrawPanelCtrl.MouseInClient) or FFullScreen then ShowCursor(False);
+ if (VlcPlayer.MouseInClient) or FFullScreen then ShowCursor(False);
 end;
 
 procedure TFormMain.TimerInfoHideTimer(Sender: TObject);
@@ -1354,6 +1410,7 @@ begin
    if (FShowGuide) and IndexInList(FCurrentGuide, FChannels.Count) then
     TableExTvGuide.ItemIndex:=FChannels[FCurrentGuide].NowWatchId;
   end;
+ DrawPanelInfo.Repaint;
 end;
 
 procedure TFormMain.TimerShowVolumeTimer(Sender: TObject);

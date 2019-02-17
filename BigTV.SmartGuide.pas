@@ -40,13 +40,6 @@ implementation
 
 {$R *.dfm}
 
-function GetMins(Time:TTime):Integer;
-var H, M, S, MSec:Word;
-begin
- DecodeTime(Time, H, M, S, MSec);
- Result:=H*60 + M;
-end;
-
 procedure TFormGuide.Button1Click(Sender: TObject);
 var i, j, delta:Integer;
     Item:TSmartGuideItem;

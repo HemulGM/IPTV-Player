@@ -1,9 +1,15 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{2A5DF5C6-99F1-40BF-8BB0-85FF16EFE533}</ProjectGuid>
+        <ProjectGuid>{5D85315E-46F6-451E-8C81-E3009D854949}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
         <Projects Include="BigTV.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="RemoteControl\HeaderFooterApplication.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Users\Геннадий\Desktop\OCR_Characters_Recognize\OCR.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -23,14 +29,32 @@
     <Target Name="BigTV:Make">
         <MSBuild Projects="BigTV.dproj" Targets="Make"/>
     </Target>
+    <Target Name="HeaderFooterApplication">
+        <MSBuild Projects="RemoteControl\HeaderFooterApplication.dproj"/>
+    </Target>
+    <Target Name="HeaderFooterApplication:Clean">
+        <MSBuild Projects="RemoteControl\HeaderFooterApplication.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HeaderFooterApplication:Make">
+        <MSBuild Projects="RemoteControl\HeaderFooterApplication.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OCR">
+        <MSBuild Projects="C:\Users\Геннадий\Desktop\OCR_Characters_Recognize\OCR.dproj"/>
+    </Target>
+    <Target Name="OCR:Clean">
+        <MSBuild Projects="C:\Users\Геннадий\Desktop\OCR_Characters_Recognize\OCR.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OCR:Make">
+        <MSBuild Projects="C:\Users\Геннадий\Desktop\OCR_Characters_Recognize\OCR.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="BigTV"/>
+        <CallTarget Targets="BigTV;HeaderFooterApplication;OCR"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="BigTV:Clean"/>
+        <CallTarget Targets="BigTV:Clean;HeaderFooterApplication:Clean;OCR:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="BigTV:Make"/>
+        <CallTarget Targets="BigTV:Make;HeaderFooterApplication:Make;OCR:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

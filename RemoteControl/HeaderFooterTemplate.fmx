@@ -1,0 +1,131 @@
+object HeaderFooterForm: THeaderFooterForm
+  Left = 0
+  Top = 0
+  Caption = 'Header Footer Form'
+  ClientHeight = 664
+  ClientWidth = 390
+  FormFactor.Width = 1440
+  FormFactor.Height = 900
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object Panel2: TPanel
+    Align = HorzCenter
+    Position.X = 28.000000000000000000
+    Size.Width = 334.000000000000000000
+    Size.Height = 664.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Panel3: TPanel
+      Align = Center
+      Size.Width = 270.000000000000000000
+      Size.Height = 265.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      object Button4: TButton
+        Anchors = []
+        Position.X = 96.000000000000000000
+        Position.Y = 11.290322303771970000
+        Size.Width = 79.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = 'Button2'
+      end
+      object Button2: TButton
+        Anchors = []
+        Position.X = 15.000000000000000000
+        Position.Y = 96.774192810058590000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = 'Button2'
+      end
+      object Button3: TButton
+        Anchors = []
+        Position.X = 177.000000000000000000
+        Position.Y = 96.774192810058590000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Button2'
+      end
+      object Button5: TButton
+        Anchors = []
+        Position.X = 96.000000000000000000
+        Position.Y = 182.292343139648400000
+        Size.Width = 79.000000000000000000
+        Size.Height = 81.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Button2'
+      end
+    end
+    object Panel1: TPanel
+      Align = Top
+      Size.Width = 334.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object Button1: TButton
+        Align = Right
+        Images = ImageList
+        ImageIndex = 0
+        Position.X = 297.000000000000000000
+        Size.Width = 37.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+    end
+  end
+  object ImageList: TImageList
+    Source = <
+      item
+        MultiResBitmap.Height = 24
+        MultiResBitmap.Width = 24
+        MultiResBitmap = <
+          item
+            Width = 24
+            Height = 24
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+              F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              025249444154484BED95BF6B535114C7F392107881A8196205BBD46EFE8256A4
+              561705418780080984FC24388922E82A48FF840EC5A96408C60C09C542C1E064
+              0637072982621132E8904CB696E4694C9E9FFBDE31FAF2A3AF76EE070EE7E67B
+              CEBDE7DE777FC473881B9A7857E2F1B84FD7F50B9AA6791B8DC6DB7ABDFE4B42
+              7BE215EF4A28140A9AA6F90CAB4422912322BBB2EF0207656C816C363B8BBDC9
+              643273224D249FCF9F56B9D819911C8C14482693613E43B9DFEF5FE27B2790F6
+              DA27ADD7EBE5C85B507DD2E9F471D1078C14F0FBFD77BD5EEF459FCFB7D16EB7
+              97904C3B3216B3D56A3D61F075FA9CC31E8A3EC0512097CB1D23F90EB332F08F
+              AAD56A474213A9D56A3F700FC8DF652599E155380A90749EA469EC75B158FC2C
+              B22BE47EC5BDA4FF147EDE1285E102330C1EC03645FA1F36E9E7C7CFDA3F6D86
+              F74017FF4DFCBE6172DBCA5324680982A300C16D121527441A502814D437BEC6
+              FE2CB23723132016511D693A62C3053EE10C4EC3155B7160AA6F5D2A95BED0EE
+              DBD25F18FB32AE8B7DB004C151A0D96CBE67865BD81C97ECBAC8AE90BBC8A4AE
+              D26C1886F1CE566D1C05D491E3FC2F63261D96B99D27253491442231C5CA5798
+              94C62A562A95CAAE842C8637D9C3C5794EE23A4D75F55F70AE67ACC01852A9D4
+              742010A852601E7BD5E97456253460EC33108BC57899F5353ADDE0C9F8897F4A
+              D10D7C4FC5F16A623789DD67A53AB13AED5BECCF8E8AFFCBC477261A8D06C3E1
+              F0639AF718E4A8AD8EB0C3E0AB3C2F4B9CB2EFA23970FDC3E1F13BC59EDC66D6
+              6745FAC3C76EB7BB562E97B7E4F72107C1E3F90D8D73EB8EAD6FB61600000000
+              49454E44AE426082}
+            FileName = 'D:\Temp\Iconion\Menu24\Material Icons_e8ac(2)_24.png'
+          end>
+        Name = 'Material Icons_e8ac(2)_24'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'Material Icons_e8ac(2)_24'
+            SourceRect.Right = 24.000000000000000000
+            SourceRect.Bottom = 24.000000000000000000
+          end>
+      end>
+    Left = 184
+    Top = 120
+  end
+end
