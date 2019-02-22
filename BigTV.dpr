@@ -6,7 +6,10 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   BigTV.Settings in 'BigTV.Settings.pas' {Form1},
-  BigTV.SmartGuide in 'BigTV.SmartGuide.pas' {FormGuide};
+  BigTV.SmartGuide in 'BigTV.SmartGuide.pas' {FormGuide},
+  PasLibVlcClassUnit in '..\#Fork\VLC\PasLibVlcClassUnit.pas',
+  PasLibVlcPlayerUnit in '..\#Fork\VLC\PasLibVlcPlayerUnit.pas',
+  PasLibVlcUnit in '..\#Fork\VLC\PasLibVlcUnit.pas';
 
 {$R *.res}
 

@@ -218,7 +218,6 @@ type
     procedure ShowNum;
     procedure VolumeDown;
     procedure VolumeUp;
-    procedure ShowWeb;
     procedure SetStayOnTop(Value: Boolean);
     procedure SetShowPanelCtrl(Value: Boolean);
     procedure LoadM3UPlayList(FileName: string; Dest: TChannels);
@@ -498,11 +497,6 @@ procedure TFormMain.CheckBoxStayOnTopClick(Sender: TObject);
 begin
  ClosePopup;
  SetStayOnTop(CheckBoxStayOnTop.Checked);
-end;
-
-procedure TFormMain.ShowWeb;
-begin
-
 end;
 
 procedure TFormMain.ClosePopup;
@@ -1060,8 +1054,6 @@ begin
  Play(GetSavedChannel);
  SetStayOnTop(CheckBoxStayOnTop.Checked);
  SetShowPanelCtrl(FShowPanelCtrl);
- //
- ShowWeb;
 end;
 
 procedure TFormMain.ShowNum;

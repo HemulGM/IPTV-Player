@@ -9,9 +9,6 @@
         <Projects Include="RemoteControl\HeaderFooterApplication.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="C:\Users\Геннадий\Desktop\OCR_Characters_Recognize\OCR.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -38,23 +35,14 @@
     <Target Name="HeaderFooterApplication:Make">
         <MSBuild Projects="RemoteControl\HeaderFooterApplication.dproj" Targets="Make"/>
     </Target>
-    <Target Name="OCR">
-        <MSBuild Projects="C:\Users\Геннадий\Desktop\OCR_Characters_Recognize\OCR.dproj"/>
-    </Target>
-    <Target Name="OCR:Clean">
-        <MSBuild Projects="C:\Users\Геннадий\Desktop\OCR_Characters_Recognize\OCR.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="OCR:Make">
-        <MSBuild Projects="C:\Users\Геннадий\Desktop\OCR_Characters_Recognize\OCR.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="BigTV;HeaderFooterApplication;OCR"/>
+        <CallTarget Targets="BigTV;HeaderFooterApplication"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="BigTV:Clean;HeaderFooterApplication:Clean;OCR:Clean"/>
+        <CallTarget Targets="BigTV:Clean;HeaderFooterApplication:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="BigTV:Make;HeaderFooterApplication:Make;OCR:Make"/>
+        <CallTarget Targets="BigTV:Make;HeaderFooterApplication:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

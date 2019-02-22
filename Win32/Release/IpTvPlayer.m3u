@@ -1,0 +1,177 @@
+#EXTM3U url-tvg="http://bolshoe.tv/tv.zip" m3uautoload=1 cache=500 deinterlace=1
+#EXTINF:-1 tvg-name="0" ,Первый канал
+udp://@239.255.42.1:1234
+#EXTINF:-1 tvg-name="1" ,Россия 1
+udp://@239.255.42.12:1234
+#EXTINF:-1 tvg-name="2" ,ТНТ
+udp://@239.255.0.19:1234
+#EXTINF:-1 tvg-name="10" ,Россия К
+udp://@239.255.42.17:1234
+#EXTINF:-1 tvg-name="17" ,Домашний
+udp://@239.255.42.30:1234
+#EXTINF:-1 tvg-name="4" ,НТВ (Кузбасс)
+udp://@239.255.0.4:1234
+#EXTINF:-1 tvg-name="5" ,СТС
+udp://@239.255.0.13:1234
+#EXTINF:-1 tvg-name="609" ,РЕН-ТВ 
+udp://@239.255.0.11:1234
+#EXTINF:-1 tvg-name="9" ,Россия 24
+udp://@239.255.42.9:1234
+#EXTINF:-1 tvg-name="71" ,МИР
+udp://@239.255.42.114:1234
+#EXTINF:-1 tvg-name="15" ,5 Канал
+udp://@239.255.0.5:1234
+#EXTINF:-1 tvg-name="610" ,ТВ3
+udp://@239.255.0.15:1234
+#EXTINF:-1 tvg-name="18" ,Карусель
+udp://@239.255.42.10:1234
+#EXTINF:-1 tvg-name="19" ,Дисней
+udp://@239.255.42.26:1234
+#EXTINF:-1 tvg-name="20" ,Детский
+udp://@239.255.42.31:1234
+#EXTINF:-1 tvg-name="23" ,Nickelodeon
+udp://@239.255.42.32:1234
+#EXTINF:-1 tvg-name="567" ,Мульт
+udp://@239.255.42.102:1234
+#EXTINF:-1 tvg-name="72" ,Мультимузыка
+udp://@239.255.42.194:1234
+#EXTINF:-1 tvg-name="574" ,О!
+udp://@239.255.42.130:1234
+#EXTINF:-1 tvg-name="26" ,TV 1000
+udp://@239.255.42.49:1234
+#EXTINF:-1 tvg-name="29" ,Время
+udp://@239.255.42.86:1234
+#EXTINF:-1 tvg-name="30" ,Дом Кино
+udp://@239.255.42.45:1234
+#EXTINF:-1 tvg-name="31" ,Sony Sci-Fi
+udp://@239.255.42.48:1234
+#EXTINF:-1 tvg-name="33" ,TV 1000 Action
+udp://@239.255.42.46:1234
+#EXTINF:-1 tvg-name="34" ,TV XXI
+udp://@239.255.42.81:1234
+#EXTINF:-1 tvg-name="153" ,Парамаунт Камеди
+udp://@239.255.42.16:1234
+#EXTINF:-1 tvg-name="35" ,8 Канал
+udp://@239.255.42.82:1234
+#EXTINF:-1 tvg-name="444" ,Че
+udp://@239.255.42.64:1234
+#EXTINF:-1 tvg-name="37" ,Кинокомедия
+udp://@239.255.42.43:1234
+#EXTINF:-1 tvg-name="638" ,Пятница
+udp://@239.255.42.112:1234
+#EXTINF:-1 tvg-name="367" ,Cinema
+udp://@239.255.42.199:1234
+#EXTINF:-1 tvg-name="650" ,Дорама HD
+udp://@239.255.43.104:1234
+#EXTINF:-1 tvg-name="43" ,MTV Dance
+udp://@239.255.42.97:1234
+#EXTINF:-1 tvg-name="178" ,МузТВ
+udp://@239.255.42.105:1234
+#EXTINF:-1 tvg-name="45" ,TIJI
+udp://@239.255.42.96:1234
+#EXTINF:-1 tvg-name="46" ,VH1 Classic
+udp://@239.255.42.98:1234
+#EXTINF:-1 tvg-name="320" ,Bridge TV Русский хит
+udp://@239.255.42.106:1234
+#EXTINF:-1 tvg-name="54" ,Bridge TV
+udp://@239.255.42.35:1234
+#EXTINF:-1 tvg-name="47" ,ТНТ Music
+udp://@239.255.42.99:1234
+#EXTINF:-1 tvg-name="49" ,Музыка первого
+udp://@239.255.42.104:1234
+#EXTINF:-1 tvg-name="587" ,Наше ТВ
+udp://@239.255.42.55:1234
+#EXTINF:-1 tvg-name="50" ,RUSSIAN MUSICBOX
+udp://@239.255.42.100:1234
+#EXTINF:-1 tvg-name="51" ,Music Box TV
+udp://@239.255.42.101:1234
+#EXTINF:-1 tvg-name="53" ,Шансон
+udp://@239.255.42.50:1234
+#EXTINF:-1 tvg-name="57" ,RU TV
+udp://@239.255.42.54:1234
+#EXTINF:-1 tvg-name="58" ,NAT GEO
+udp://@239.255.42.37:1234
+#EXTINF:-1 tvg-name="473" ,NTG Wild
+udp://@239.255.42.36:1234
+#EXTINF:-1 tvg-name="63" ,Viasat Explorer
+udp://@239.255.42.41:1234
+#EXTINF:-1 tvg-name="64" ,Viasat History
+udp://@239.255.42.40:1234
+#EXTINF:-1 tvg-name="407" ,Бобёр
+udp://@239.255.42.207:1234
+#EXTINF:-1 tvg-name="154" ,Sony Channel
+udp://@239.255.42.42:1234
+#EXTINF:-1 tvg-name="525" ,Sony Turbo
+udp://@239.255.42.93:1234
+#EXTINF:-1 tvg-name="65" ,РБК
+udp://@239.255.42.18:1234
+#EXTINF:-1 tvg-name="36" ,Вместе РФ
+udp://@239.255.42.181:1234
+#EXTINF:-1 tvg-name="70" ,RT
+udp://@239.255.42.116:1234
+#EXTINF:-1 tvg-name="75" ,Драйв
+udp://@239.255.42.161:1234
+#EXTINF:-1 tvg-name="531" ,Game Show
+udp://@239.255.42.200:1234
+#EXTINF:-1 tvg-name="85" ,2x2
+udp://@239.255.42.29:1234
+#EXTINF:-1 tvg-name="523" ,Nick Jr.
+udp://@239.255.42.126:1234
+#EXTINF:-1 tvg-name="469" ,СТС Love
+udp://@239.255.42.89:1234
+#EXTINF:-1 tvg-name="637" ,Супер
+udp://@239.255.42.120:1234
+#EXTINF:-1 tvg-name="56" ,Ю
+udp://@239.255.42.52:1234
+#EXTINF:-1 tvg-name="90" ,Домашние животные
+udp://@239.255.42.133:1234
+#EXTINF:-1 tvg-name="119" ,Zooпарк
+udp://@239.255.42.131:1234
+#EXTINF:-1 tvg-name="124" ,Russian Travel Guide
+udp://@239.255.42.180:1234
+#EXTINF:-1 tvg-name="122" ,ТНТ 4
+udp://@239.255.42.196:1234
+#EXTINF:-1 tvg-name="138" ,Европа + ТВ
+udp://@239.255.42.103:1234
+#EXTINF:-1 tvg-name="248" ,HD Первый канал 
+udp://@239.255.43.45:1234
+#EXTINF:-1 tvg-name="155" ,Россия 1 HD
+udp://@239.255.43.44:1234
+#EXTINF:-1 tvg-name="129" ,Приключения HD
+udp://@239.255.43.37:1234
+#EXTINF:-1 tvg-name="524" ,Russian Musicbox HD
+udp://@239.255.43.102:1234
+#EXTINF:-1 tvg-name="126" ,HD Nickelodeon
+udp://@239.255.43.24:1234
+#EXTINF:-1 tvg-name="297" ,HD Телеканал 360°
+udp://@239.255.43.69:1234
+#EXTINF:-1 tvg-name="272" ,HD Russian Travel Guide
+udp://@239.255.43.43:1234
+#EXTINF:-1 tvg-name="316" ,CMusic HD
+udp://@239.255.43.84:1234
+#EXTINF:-1 tvg-name="257" ,HD Мультимания 
+udp://@239.255.43.63:1234
+#EXTINF:-1 tvg-name="256" ,HD Детский 
+udp://@239.255.43.62:1234
+#EXTINF:-1 tvg-name="307" ,В мире животных HD
+udp://@239.255.43.74:1234
+#EXTINF:-1 tvg-name="140" ,HD Fox 
+udp://@239.255.43.19:1234
+#EXTINF:-1 tvg-name="198" ,HD Fox Life 
+udp://@239.255.43.48:1234
+#EXTINF:-1 tvg-name="106" ,Hollywood HD
+udp://@239.255.43.25:1234
+#EXTINF:-1 tvg-name="260" ,Планета HD
+udp://@239.255.43.57:1234
+#EXTINF:-1 tvg-name="303" ,HD Paramount Comedy
+udp://@239.255.43.70:1234
+#EXTINF:-1 tvg-name="304" ,HD MTV
+udp://@239.255.43.71:1234
+#EXTINF:-1 tvg-name="537" ,Кинопремьера HD
+udp://@239.255.43.75:1234
+#EXTINF:-1 tvg-name="538" ,Кинохит
+udp://@239.255.42.110:1234
+#EXTINF:-1 tvg-name="539" ,Киносемья
+udp://@239.255.42.108:1234
+#EXTINF:-1 tvg-name="654" ,HOME 4K
+udp://@239.255.43.206:1234
