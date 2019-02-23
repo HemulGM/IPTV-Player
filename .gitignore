@@ -68,3 +68,7 @@ __recovery/
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
 Win32/Debug/config.ini
+Win32/Release/config.ini
+Win32/Debug/TvGuide
+Win32/Release/TvGuide
+*.ini
