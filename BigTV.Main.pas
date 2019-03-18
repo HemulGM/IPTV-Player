@@ -636,7 +636,7 @@ end;
 
 procedure TFormMain.VlcPlayerClick(Sender: TObject);
 begin
- VlcPlayer.SetFocus;
+  VlcPlayer.SetFocus;
 end;
 
 procedure TFormMain.VlcPlayerDblClick(Sender: TObject);
