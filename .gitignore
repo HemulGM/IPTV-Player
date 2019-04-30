@@ -74,3 +74,6 @@ Win32/Release/TvGuide
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+*.ndx
+*.pdt
+Win32/Release/config.ini

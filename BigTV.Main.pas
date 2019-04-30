@@ -84,8 +84,8 @@ type
     TableExFavChannels: TTableEx;
     ButtonFlatPause: TButtonFlat;
     ButtonFlatPlay: TButtonFlat;
-    VlcPlayer: TPasLibVlcPlayer;
     ButtonFlatTVGuide: TButtonFlat;
+    VlcPlayer: TPasLibVlcPlayer;
     procedure FormCreate(Sender: TObject);
     procedure TableExChannelsDblClick(Sender: TObject);
     procedure DrawPanelVolumePaint(Sender: TObject);
@@ -130,7 +130,6 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure TimerNumberTimer(Sender: TObject);
     procedure DrawPanelLeftTopPaint(Sender: TObject);
-    procedure DrawPanelCtrlPaint(Sender: TObject);
     procedure TimerRefreshTimer(Sender: TObject);
     procedure DrawPanelTopRightPaint(Sender: TObject);
     procedure CheckBoxStayOnTopClick(Sender: TObject);
@@ -636,7 +635,7 @@ end;
 
 procedure TFormMain.VlcPlayerClick(Sender: TObject);
 begin
-  VlcPlayer.SetFocus;
+ VlcPlayer.SetFocus;
 end;
 
 procedure TFormMain.VlcPlayerDblClick(Sender: TObject);
@@ -676,7 +675,6 @@ begin
   if (VlcPlayer.Height - Y) < 3 then
        SetShowPanelCtrl(True)
   else SetShowPanelCtrl(False);
-
 end;
 
 procedure TFormMain.ShowPopup;
@@ -690,11 +688,6 @@ begin
   TMouseButton.mbRight: ShowPopup;
   TMouseButton.mbMiddle: SetMute(not FMute);
  end;
-end;
-
-procedure TFormMain.DrawPanelCtrlPaint(Sender: TObject);
-begin
- //
 end;
 
 procedure TFormMain.DrawPanelInfoPaint(Sender: TObject);

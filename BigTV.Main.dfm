@@ -59,12 +59,10 @@ object FormMain: TFormMain
       OnMouseUp = VlcPlayerMouseUp
       SpuShow = False
       OsdShow = False
-      AudioOutput = aoWaveOut
       SnapShotFmt = 'png'
-      DeinterlaceFilter = deON
       MouseEventsHandler = mehComponent
-      ExplicitLeft = 32
-      ExplicitTop = 6
+      ExplicitLeft = 6
+      ExplicitTop = -6
     end
   end
   object PanelCtrl: TPanel
@@ -115,15 +113,15 @@ object FormMain: TFormMain
         DefaultPaint = False
         OnMouseEnter = DrawPanelVolumeMouseEnter
         OnMouseLeave = DrawPanelVolumeMouseLeave
+        OnMouseDown = DrawPanelVolumeMouseDown
+        OnMouseMove = DrawPanelVolumeMouseMove
+        OnMouseUp = DrawPanelVolumeMouseUp
         OnPaint = DrawPanelVolumePaint
         Align = alClient
         Color = 3222827
         ParentBackground = False
         TabOrder = 0
         TabStop = True
-        OnMouseDown = DrawPanelVolumeMouseDown
-        OnMouseMove = DrawPanelVolumeMouseMove
-        OnMouseUp = DrawPanelVolumeMouseUp
         OnMouseWheelDown = DrawPanelVolumeMouseWheelDown
         OnMouseWheelUp = DrawPanelVolumeMouseWheelUp
       end
@@ -162,6 +160,7 @@ object FormMain: TFormMain
         Shape = stRoundRect
         ShowFocusRect = False
         TabOrder = 1
+        TabStop = True
         TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
         SubTextFont.Charset = DEFAULT_CHARSET
         SubTextFont.Color = clWhite
@@ -204,6 +203,7 @@ object FormMain: TFormMain
         Shape = stRoundRect
         ShowFocusRect = False
         TabOrder = 2
+        TabStop = True
         TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
         SubTextFont.Charset = DEFAULT_CHARSET
         SubTextFont.Color = clWhite
@@ -213,9 +213,9 @@ object FormMain: TFormMain
       end
     end
     object ButtonFlatPrevChannel: TButtonFlat
-      Left = 754
+      Left = 769
       Top = 12
-      Width = 32
+      Width = 24
       Height = 38
       Anchors = [akTop, akRight]
       Caption = ''
@@ -239,7 +239,6 @@ object FormMain: TFormMain
       FontDown.Style = []
       GroupItemKind = giCenter
       IgnorBounds = True
-      ImageIndentLeft = 7
       ImageIndex = 10
       Images = ImageList16
       OnClick = ButtonFlatPrevChannelClick
@@ -247,6 +246,7 @@ object FormMain: TFormMain
       Shape = stRoundRect
       ShowFocusRect = False
       TabOrder = 1
+      TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -256,7 +256,7 @@ object FormMain: TFormMain
       AutoClick = 500
     end
     object ButtonFlatVUP: TButtonFlat
-      Left = 786
+      Left = 793
       Top = 12
       Width = 32
       Height = 19
@@ -288,6 +288,7 @@ object FormMain: TFormMain
       RoundRectParam = 4
       ShowFocusRect = False
       TabOrder = 2
+      TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -297,7 +298,7 @@ object FormMain: TFormMain
       AutoClick = 300
     end
     object ButtonFlatVDOWN: TButtonFlat
-      Left = 786
+      Left = 793
       Top = 31
       Width = 32
       Height = 19
@@ -329,6 +330,7 @@ object FormMain: TFormMain
       RoundRectParam = 4
       ShowFocusRect = False
       TabOrder = 3
+      TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -338,9 +340,9 @@ object FormMain: TFormMain
       AutoClick = 300
     end
     object ButtonFlatNextChannel: TButtonFlat
-      Left = 818
+      Left = 825
       Top = 12
-      Width = 32
+      Width = 24
       Height = 38
       Anchors = [akTop, akRight]
       Caption = ''
@@ -364,7 +366,6 @@ object FormMain: TFormMain
       FontDown.Style = []
       GroupItemKind = giCenter
       IgnorBounds = True
-      ImageIndentLeft = 7
       ImageIndex = 12
       Images = ImageList16
       OnClick = ButtonFlatNextChannelClick
@@ -372,6 +373,7 @@ object FormMain: TFormMain
       Shape = stRoundRect
       ShowFocusRect = False
       TabOrder = 4
+      TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -381,7 +383,7 @@ object FormMain: TFormMain
       AutoClick = 500
     end
     object ButtonFlatClose: TButtonFlat
-      Left = 914
+      Left = 913
       Top = 12
       Width = 38
       Height = 38
@@ -415,6 +417,7 @@ object FormMain: TFormMain
       Shape = stRoundRect
       ShowFocusRect = False
       TabOrder = 5
+      TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -424,7 +427,7 @@ object FormMain: TFormMain
       AutoClick = 500
     end
     object ButtonFlatMin: TButtonFlat
-      Left = 850
+      Left = 849
       Top = 12
       Width = 32
       Height = 38
@@ -458,6 +461,7 @@ object FormMain: TFormMain
       Shape = stRoundRect
       ShowFocusRect = False
       TabOrder = 6
+      TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -467,7 +471,7 @@ object FormMain: TFormMain
       AutoClick = 500
     end
     object ButtonFlatMax: TButtonFlat
-      Left = 882
+      Left = 881
       Top = 12
       Width = 32
       Height = 38
@@ -501,6 +505,7 @@ object FormMain: TFormMain
       Shape = stRoundRect
       ShowFocusRect = False
       TabOrder = 7
+      TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -510,7 +515,7 @@ object FormMain: TFormMain
       AutoClick = 500
     end
     object ButtonFlatPause: TButtonFlat
-      Left = 678
+      Left = 693
       Top = 12
       Width = 38
       Height = 38
@@ -544,6 +549,7 @@ object FormMain: TFormMain
       Shape = stRoundRect
       ShowFocusRect = False
       TabOrder = 8
+      TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -553,7 +559,7 @@ object FormMain: TFormMain
       AutoClick = 500
     end
     object ButtonFlatPlay: TButtonFlat
-      Left = 716
+      Left = 731
       Top = 12
       Width = 38
       Height = 38
@@ -587,6 +593,7 @@ object FormMain: TFormMain
       Shape = stRoundRect
       ShowFocusRect = False
       TabOrder = 9
+      TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -597,9 +604,9 @@ object FormMain: TFormMain
     end
   end
   object DrawPanelInfo: TDrawPanel
-    Left = 606
-    Top = 590
-    Width = 349
+    Left = 608
+    Top = 592
+    Width = 351
     Height = 45
     DefaultPaint = False
     OnPaint = DrawPanelInfoPaint
@@ -736,6 +743,7 @@ object FormMain: TFormMain
           Shape = stRoundRect
           ShowFocusRect = False
           TabOrder = 0
+          TabStop = True
           TextFormat = [tfSingleLine, tfVerticalCenter]
           SubTextFont.Charset = DEFAULT_CHARSET
           SubTextFont.Color = clWhite
@@ -798,6 +806,7 @@ object FormMain: TFormMain
           Shape = stRoundRect
           ShowFocusRect = False
           TabOrder = 0
+          TabStop = True
           TextFormat = [tfSingleLine, tfVerticalCenter]
           SubTextFont.Charset = DEFAULT_CHARSET
           SubTextFont.Color = clWhite
@@ -869,7 +878,7 @@ object FormMain: TFormMain
     end
   end
   object PanelPopup: TPanel
-    Left = 346
+    Left = 682
     Top = 136
     Width = 223
     Height = 372
@@ -912,6 +921,7 @@ object FormMain: TFormMain
       RoundRectParam = 0
       ShowFocusRect = False
       TabOrder = 0
+      TabStop = True
       TextFormat = [tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -953,6 +963,7 @@ object FormMain: TFormMain
       RoundRectParam = 0
       ShowFocusRect = False
       TabOrder = 1
+      TabStop = True
       TextFormat = [tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -994,6 +1005,7 @@ object FormMain: TFormMain
       RoundRectParam = 0
       ShowFocusRect = False
       TabOrder = 2
+      TabStop = True
       TextFormat = [tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -1038,6 +1050,7 @@ object FormMain: TFormMain
       RoundRectParam = 0
       ShowFocusRect = False
       TabOrder = 3
+      TabStop = True
       TextFormat = [tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -1082,6 +1095,7 @@ object FormMain: TFormMain
       RoundRectParam = 0
       ShowFocusRect = False
       TabOrder = 4
+      TabStop = True
       TextFormat = [tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -1180,6 +1194,7 @@ object FormMain: TFormMain
       RoundRectParam = 0
       ShowFocusRect = False
       TabOrder = 6
+      TabStop = True
       TextFormat = [tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
@@ -1189,7 +1204,7 @@ object FormMain: TFormMain
     end
   end
   object DrawPanelLeftTop: TDrawPanel
-    Left = 606
+    Left = 608
     Top = 8
     Width = 75
     Height = 45
@@ -1199,7 +1214,7 @@ object FormMain: TFormMain
     TabOrder = 5
   end
   object DrawPanelTopRight: TDrawPanel
-    Left = 909
+    Left = 914
     Top = 8
     Width = 45
     Height = 45
@@ -1213,10 +1228,10 @@ object FormMain: TFormMain
   end
   object ImageList16: TImageList
     ColorDepth = cd32Bit
-    Left = 625
-    Top = 96
+    Left = 393
+    Top = 144
     Bitmap = {
-      494C010115008000B40010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115008000BC0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2018,47 +2033,47 @@ object FormMain: TFormMain
   object TimerInfoHide: TTimer
     Enabled = False
     OnTimer = TimerInfoHideTimer
-    Left = 625
-    Top = 168
+    Left = 393
+    Top = 216
   end
   object TimerHideCursor: TTimer
     Enabled = False
     Interval = 5000
     OnTimer = TimerHideCursorTimer
-    Left = 624
-    Top = 224
+    Left = 392
+    Top = 272
   end
   object ApplicationEvents: TApplicationEvents
     OnMessage = ApplicationEventsMessage
-    Left = 704
-    Top = 168
+    Left = 472
+    Top = 216
   end
   object TimerShowVolume: TTimer
     Enabled = False
     OnTimer = TimerShowVolumeTimer
-    Left = 624
-    Top = 400
+    Left = 392
+    Top = 448
   end
   object TimerNumber: TTimer
     Enabled = False
     Interval = 3000
     OnTimer = TimerNumberTimer
-    Left = 624
-    Top = 344
+    Left = 392
+    Top = 392
   end
   object TimerRefresh: TTimer
     OnTimer = TimerRefreshTimer
-    Left = 624
-    Top = 280
+    Left = 392
+    Top = 328
   end
   object ImageList32: TImageList
     ColorDepth = cd32Bit
     Height = 32
     Width = 32
-    Left = 704
-    Top = 96
+    Left = 472
+    Top = 144
     Bitmap = {
-      494C010101000800440020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101010008004C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
