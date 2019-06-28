@@ -16,6 +16,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  ReportMemoryLeaksOnShutdown := True;
   Application.Title := 'BigTV';
   Application.CreateForm(TFormMain, FormMain);
   Application.CreateForm(TForm1, Form1);

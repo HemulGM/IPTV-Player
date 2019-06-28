@@ -77,3 +77,4 @@ modules/
 *.ndx
 *.pdt
 Win32/Release/config.ini
+Win32/

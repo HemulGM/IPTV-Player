@@ -9,6 +9,7 @@ object FormGuide: TFormGuide
   ParentFont = True
   OldCreateOrder = False
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -34,6 +35,8 @@ object FormGuide: TFormGuide
     Columns = <
       item
         Caption = #1050#1072#1085#1072#1083
+        Width = 120
+        MinWidth = 120
       end
       item
         Caption = #1063#1090#1086
@@ -81,7 +84,7 @@ object FormGuide: TFormGuide
   object TimerUpdate: TTimer
     Interval = 60000
     OnTimer = TimerUpdateTimer
-    Left = 80
+    Left = 184
     Top = 144
   end
 end
