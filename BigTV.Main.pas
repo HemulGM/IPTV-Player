@@ -8,9 +8,9 @@ uses
   Vcl.ExtCtrls, Vcl.StdCtrls, PasLibVlcUnit, PasLibVlcClassUnit,
   System.Generics.Collections, Vcl.Grids, HGM.Controls.VirtualTable,
   System.Types, HGM.Controls.PanelExt, HGM.Button, System.ImageList, Vcl.ImgList,
-  Vcl.AppEvnts, IdHTTP, HGM.Popup, HGM.Common.Settings, Vcl.OleCtrls, SHDocVw,
+  Vcl.AppEvnts, HGM.Popup, HGM.Common.Settings, Vcl.OleCtrls, SHDocVw,
   PasLibVlcPlayerUnit, IPPeerClient, Data.Bind.Components,
-  Data.Bind.ObjectScope, REST.Client;
+  Data.Bind.ObjectScope, REST.Client, System.Net.HttpClient;
 
 type
   TChannelGuideItem = record
@@ -278,7 +278,7 @@ end;
 
 procedure TFormMain.LoadTVGuide(Url: string);
 var
-  HTTP: TIdHTTP;
+  HTTP: THTTPClient;
   Stream: TMemoryStream;
   ZIP: TZipFile;
   Ini: TIniFile;
@@ -291,7 +291,7 @@ begin
   Ini := TIniFile.Create(GetIniFileName);
   if Ini.ReadDateTime('Info', 'LastTvGuideCheck', Now - 2) < Now - 1 / 24 * 12 then
   begin
-    HTTP := TIdHTTP.Create(nil);
+    HTTP := THTTPClient.Create;
     HTTP.HandleRedirects := True;
     Stream := TMemoryStream.Create;
     ZIP := TZipFile.Create;
@@ -447,12 +447,12 @@ begin
 end;
 
 procedure TFormMain.LoadPlayListTo(FileName: string);
-var HTTP: TIdHTTP;
+var HTTP: THTTPClient;
     Stream: TMemoryStream;
 begin
   if not FPlaylistURL.IsEmpty then
   begin
-    HTTP := TIdHTTP.Create(nil);
+    HTTP := THTTPClient.Create;
     HTTP.HandleRedirects := True;
     Stream := TMemoryStream.Create;
     try
@@ -725,7 +725,7 @@ end;
 
 procedure TFormMain.ShowPopup;
 begin
-  FFormPopup := TFormPopup.Create(Self, PanelPopup, Mouse.CursorPos.X, Mouse.CursorPos.Y);
+  FFormPopup := TFormPopup.CreatePopup(Self, PanelPopup, nil, Mouse.CursorPos.X, Mouse.CursorPos.Y, []);
 end;
 
 procedure TFormMain.VlcPlayerMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -1035,7 +1035,7 @@ begin
   FOldSize := Rect(Left, Top, Width, Height);
   FullScreen := FSettings.GetBool('General', 'FullScreen', False);
   Volume := FSettings.GetInt('General', 'Volume', 100);
-  FPlaylistURL := FSettings.GetStr('General', 'PlaylistURL', 'http://bambuk.tv/public/bambuktv2.m3u');
+  FPlaylistURL := FSettings.GetStr('General', 'PlaylistURL', 'https://webarmen.com/my/iptv/auto.nogrp.m3u');
   FShowPanelCtrl := FSettings.GetBool('General', 'ShowPanelCtrl', True);
   CheckBoxPanelCtrl.Checked := FShowPanelCtrl;
   CheckBoxStayOnTop.Checked := FSettings.GetBool('General', 'StayOnTop', False);
